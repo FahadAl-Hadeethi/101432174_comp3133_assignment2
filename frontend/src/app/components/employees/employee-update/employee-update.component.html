@@ -1,0 +1,30 @@
+<div class="form-wrapper">
+  <h2>Edit Employee</h2>
+  <form (ngSubmit)="updateEmployee()">
+    <label>First Name</label>
+    <input type="text" [(ngModel)]="employee.first_name" name="first_name" required />
+
+    <label>Last Name</label>
+    <input type="text" [(ngModel)]="employee.last_name" name="last_name" required />
+
+    <label>Email</label>
+    <input type="email" [(ngModel)]="employee.email" name="email" required />
+
+    <label>Gender</label>
+    <input type="text" [(ngModel)]="employee.gender" name="gender" required />
+
+    <label>Designation</label>
+    <input type="text" [(ngModel)]="employee.designation" name="designation" required />
+
+    <label>Department</label>
+    <input type="text" [(ngModel)]="employee.department" name="department" required />
+
+    <label>Salary</label>
+    <input type="number" [(ngModel)]="employee.salary" name="salary" required />
+
+    <div class="btn-group">
+      <button type="submit" class="btn save">Update</button>
+      <button type="button" class="btn cancel" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

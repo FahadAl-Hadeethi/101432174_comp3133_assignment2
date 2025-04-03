@@ -1,0 +1,45 @@
+<div class="login-container">
+    <h2>Login</h2>
+  
+    <form #loginForm="ngForm" (ngSubmit)="login()">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        required
+        email
+        #emailField="ngModel"
+      />
+      <div class="validation-error" *ngIf="emailField.invalid && emailField.touched">
+        <span *ngIf="emailField.errors?.['required']">Email is required.</span>
+        <span *ngIf="emailField.errors?.['email']">Invalid email format.</span>
+      </div>
+  
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        required
+        minlength="4"
+        #passwordField="ngModel"
+      />
+      <div class="validation-error" *ngIf="passwordField.invalid && passwordField.touched">
+        <span *ngIf="passwordField.errors?.['required']">Password is required.</span>
+        <span *ngIf="passwordField.errors?.['minlength']">Password must be at least 4 characters.</span>
+      </div>
+  
+      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+  
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+  
+    <p class="signup-link">
+      Don’t have an account?
+      <a routerLink="/signup">Create one</a>
+    </p>
+  </div>
+  

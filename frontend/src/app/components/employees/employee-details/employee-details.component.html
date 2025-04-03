@@ -1,0 +1,17 @@
+<div class="details-container" *ngIf="employee">
+  <h2 class="title">Employee Details</h2>
+  <div class="details-row">
+    <p><strong>First Name:</strong> {{ employee.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ employee.last_name }}</p>
+    <p><strong>Email:</strong> {{ employee.email }}</p>
+    <p><strong>Gender:</strong> {{ employee.gender }}</p>
+    <p><strong>Department:</strong> {{ employee.department }}</p>
+    <p><strong>Designation:</strong> {{ employee.designation }}</p>
+    <p><strong>Salary:</strong> ${{ employee.salary }}</p>
+    <p><strong>Date of Joining:</strong> {{ employee.date_of_joining | date }}</p>
+  </div>
+</div>
+
+<div *ngIf="error" class="error">
+  {{ error }}
+</div>

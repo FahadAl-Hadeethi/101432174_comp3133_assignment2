@@ -1,0 +1,42 @@
+<div class="form-wrapper">
+    <h2>Add Employee</h2>
+  
+    <form #empForm="ngForm" (ngSubmit)="save()">
+      <label>First Name</label>
+      <input type="text" [(ngModel)]="employee.first_name" name="first_name" required />
+  
+      <label>Last Name</label>
+      <input type="text" [(ngModel)]="employee.last_name" name="last_name" required />
+  
+      <label>Email</label>
+      <input type="email" [(ngModel)]="employee.email" name="email" required email />
+  
+      <label>Gender</label>
+      <select [(ngModel)]="employee.gender" name="gender" required>
+        <option value="" disabled selected>Select gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+  
+      <label>Designation</label>
+      <input type="text" [(ngModel)]="employee.designation" name="designation" required />
+  
+      <label>Salary</label>
+      <input type="number" [(ngModel)]="employee.salary" name="salary" required min="0" />
+  
+      <label>Department</label>
+      <input type="text" [(ngModel)]="employee.department" name="department" required />
+  
+      <label>Date of Joining</label>
+      <input type="date" [(ngModel)]="employee.date_of_joining" name="date_of_joining" required />
+  
+      <div class="btn-group">
+        <button type="submit" class="btn save" [disabled]="empForm.invalid">Save</button>
+        <button type="button" class="btn cancel" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+  </div>
+  
