@@ -1,29 +1,100 @@
 <div class="form-wrapper">
   <h2>Edit Employee</h2>
-  <form (ngSubmit)="updateEmployee()">
+  <form (ngSubmit)="updateEmployee()" #updateForm="ngForm">
     <label>First Name</label>
-    <input type="text" [(ngModel)]="employee.first_name" name="first_name" required />
+    <input
+      type="text"
+      [(ngModel)]="employee.first_name"
+      name="first_name"
+      required
+      pattern="^[A-Za-z]+$"
+      #firstName="ngModel"
+    />
+    <div *ngIf="firstName.invalid && firstName.touched" class="error-message">
+      First name is required and must contain only letters.
+    </div>
 
     <label>Last Name</label>
-    <input type="text" [(ngModel)]="employee.last_name" name="last_name" required />
+    <input
+      type="text"
+      [(ngModel)]="employee.last_name"
+      name="last_name"
+      required
+      pattern="^[A-Za-z]+$"
+      #lastName="ngModel"
+    />
+    <div *ngIf="lastName.invalid && lastName.touched" class="error-message">
+      Last name is required and must contain only letters.
+    </div>
 
     <label>Email</label>
-    <input type="email" [(ngModel)]="employee.email" name="email" required />
+    <input
+      type="email"
+      [(ngModel)]="employee.email"
+      name="email"
+      required
+      #email="ngModel"
+    />
+    <div *ngIf="email.invalid && email.touched" class="error-message">
+      Please enter a valid email.
+    </div>
 
     <label>Gender</label>
-    <input type="text" [(ngModel)]="employee.gender" name="gender" required />
+    <select
+      name="gender"
+      [(ngModel)]="employee.gender"
+      required
+      #gender="ngModel"
+    >
+      <option value="" disabled selected>Select gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+    <div *ngIf="gender.invalid && gender.touched" class="error-message">
+      Gender is required.
+    </div>
 
     <label>Designation</label>
-    <input type="text" [(ngModel)]="employee.designation" name="designation" required />
+    <input
+      type="text"
+      [(ngModel)]="employee.designation"
+      name="designation"
+      required
+      #designation="ngModel"
+    />
+    <div *ngIf="designation.invalid && designation.touched" class="error-message">
+      Designation is required.
+    </div>
 
     <label>Department</label>
-    <input type="text" [(ngModel)]="employee.department" name="department" required />
+    <input
+      type="text"
+      [(ngModel)]="employee.department"
+      name="department"
+      required
+      #department="ngModel"
+    />
+    <div *ngIf="department.invalid && department.touched" class="error-message">
+      Department is required.
+    </div>
 
     <label>Salary</label>
-    <input type="number" [(ngModel)]="employee.salary" name="salary" required />
+    <input
+      type="number"
+      [(ngModel)]="employee.salary"
+      name="salary"
+      required
+      min="1"
+      #salary="ngModel"
+    />
+    <div *ngIf="salary.invalid && salary.touched" class="error-message">
+      Salary must be a positive number.
+    </div>
 
     <div class="btn-group">
-      <button type="submit" class="btn save">Update</button>
+      <button type="submit" class="btn save" [disabled]="updateForm.invalid">
+        Update
+      </button>
       <button type="button" class="btn cancel" (click)="cancel()">Cancel</button>
     </div>
   </form>

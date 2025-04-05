@@ -1,42 +1,128 @@
 <div class="form-wrapper">
-    <h2>Add Employee</h2>
-  
-    <form #empForm="ngForm" (ngSubmit)="save()">
-      <label>First Name</label>
-      <input type="text" [(ngModel)]="employee.first_name" name="first_name" required />
-  
-      <label>Last Name</label>
-      <input type="text" [(ngModel)]="employee.last_name" name="last_name" required />
-  
-      <label>Email</label>
-      <input type="email" [(ngModel)]="employee.email" name="email" required email />
-  
-      <label>Gender</label>
-      <select [(ngModel)]="employee.gender" name="gender" required>
-        <option value="" disabled selected>Select gender</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Other">Other</option>
-      </select>
-  
-      <label>Designation</label>
-      <input type="text" [(ngModel)]="employee.designation" name="designation" required />
-  
-      <label>Salary</label>
-      <input type="number" [(ngModel)]="employee.salary" name="salary" required min="0" />
-  
-      <label>Department</label>
-      <input type="text" [(ngModel)]="employee.department" name="department" required />
-  
-      <label>Date of Joining</label>
-      <input type="date" [(ngModel)]="employee.date_of_joining" name="date_of_joining" required />
-  
-      <div class="btn-group">
-        <button type="submit" class="btn save" [disabled]="empForm.invalid">Save</button>
-        <button type="button" class="btn cancel" (click)="cancel()">Cancel</button>
-      </div>
-    </form>
-  
-    <div *ngIf="error" class="error-message">{{ error }}</div>
-  </div>
-  
+  <h2>Add Employee</h2>
+
+  <form #empForm="ngForm" (ngSubmit)="save()">
+    <!-- First Name -->
+    <label>First Name</label>
+    <input
+      type="text"
+      name="first_name"
+      [(ngModel)]="employee.first_name"
+      required
+      pattern="^[A-Za-z\s]+$"
+      #firstName="ngModel"
+    />
+    <div class="error-message" *ngIf="firstName.invalid && firstName.touched">
+      <small *ngIf="firstName.errors?.['required']">First name is required.</small>
+      <small *ngIf="firstName.errors?.['pattern']">Only letters are allowed.</small>
+    </div>
+
+    <!-- Last Name -->
+    <label>Last Name</label>
+    <input
+      type="text"
+      name="last_name"
+      [(ngModel)]="employee.last_name"
+      required
+      pattern="^[A-Za-z\s]+$"
+      #lastName="ngModel"
+    />
+    <div class="error-message" *ngIf="lastName.invalid && lastName.touched">
+      <small *ngIf="lastName.errors?.['required']">Last name is required.</small>
+      <small *ngIf="lastName.errors?.['pattern']">Only letters are allowed.</small>
+    </div>
+
+    <!-- Email -->
+    <label>Email</label>
+    <input
+      type="email"
+      name="email"
+      [(ngModel)]="employee.email"
+      required
+      #email="ngModel"
+    />
+    <div class="error-message" *ngIf="email.invalid && email.touched">
+      <small *ngIf="email.errors?.['required']">Email is required.</small>
+      <small *ngIf="email.errors?.['email']">Enter a valid email address.</small>
+    </div>
+
+    <!-- Gender -->
+    <label>Gender</label>
+    <select name="gender" [(ngModel)]="employee.gender" required #gender="ngModel">
+      <option value="" disabled selected>Select gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+    <div class="error-message" *ngIf="gender.invalid && gender.touched">
+      <small>Gender is required.</small>
+    </div>
+
+    <!-- Designation -->
+    <label>Designation</label>
+    <input
+      type="text"
+      name="designation"
+      [(ngModel)]="employee.designation"
+      required
+      pattern="^[A-Za-z\s]+$"
+      #designation="ngModel"
+    />
+    <div class="error-message" *ngIf="designation.invalid && designation.touched">
+      <small *ngIf="designation.errors?.['required']">Designation is required.</small>
+      <small *ngIf="designation.errors?.['pattern']">Only letters are allowed.</small>
+    </div>
+
+    <!-- Salary -->
+    <label>Salary</label>
+    <input
+      type="number"
+      name="salary"
+      [(ngModel)]="employee.salary"
+      required
+      min="0"
+      #salary="ngModel"
+    />
+    <div class="error-message" *ngIf="salary.invalid && salary.touched">
+      <small *ngIf="salary.errors?.['required']">Salary is required.</small>
+      <small *ngIf="salary.errors?.['min']">Salary must be a positive number.</small>
+    </div>
+
+    <!-- Department -->
+    <label>Department</label>
+    <input
+      type="text"
+      name="department"
+      [(ngModel)]="employee.department"
+      required
+      pattern="^[A-Za-z\s]+$"
+      #department="ngModel"
+    />
+    <div class="error-message" *ngIf="department.invalid && department.touched">
+      <small *ngIf="department.errors?.['required']">Department is required.</small>
+      <small *ngIf="department.errors?.['pattern']">Only letters are allowed.</small>
+    </div>
+
+    <!-- Date of Joining -->
+    <label>Date of Joining</label>
+    <input
+      type="date"
+      name="date_of_joining"
+      [(ngModel)]="employee.date_of_joining"
+      required
+      #joiningDate="ngModel"
+    />
+    <div class="error-message" *ngIf="joiningDate.invalid && joiningDate.touched">
+      <small>Date of joining is required.</small>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="btn-group">
+      <button type="submit" class="btn save" [disabled]="empForm.invalid">Save</button>
+      <button type="button" class="btn cancel" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+
+  <!-- General Error -->
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+</div>
